@@ -3,8 +3,9 @@
 const navbarNav = document.querySelector(".navbar-nav");
 
 // ketika hamburger di klik
-document.querySelector("#hamburger-menu").onclick = () => {
+document.querySelector("#hamburger-menu").onclick = (e) => {
   navbarNav.classList.toggle("active");
+  e.preventDefault();
 };
 
 // toogle class active untuk search form
@@ -21,7 +22,7 @@ document.querySelector("#search-button").onclick = (e) => {
 const shoppingCart = document.querySelector(".shopping-cart");
 document.querySelector("#shopping-cart-button").onclick = (e) => {
   shoppingCart.classList.toggle("active");
-  e.preventDefault;
+  e.preventDefault();
 };
 
 // klik diluar element

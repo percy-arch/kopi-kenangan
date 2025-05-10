@@ -86,15 +86,28 @@ form.addEventListener("keyup", function () {
   checkoutButton.classList.remove("disabled");
 });
 // kirim data
-checkoutButton.addEventListener("click", function (e) {
+checkoutButton.addEventListener("click", async function (e) {
   e.preventDefault();
   const formData = new FormData(form);
   const data = new URLSearchParams(formData);
   const objData = Object.fromEntries(data);
-  const massage = formatMassage(objData);
-  window.open(
-    "https://wa.me/6282193266191?text=" + encodeURIComponent(massage)
-  );
+  // const massage = formatMassage(objData);
+  // window.open(
+  //   "https://wa.me/6282193266191?text=" + encodeURIComponent(massage)
+  // );
+
+  // minta transaction token
+  try {
+    const response = await fetch("php/placeOrder.php", {
+      method: "POST",
+      body: data,
+    });
+    const token = await response.text();
+    // console.log(token)
+    window.snap.pay(token);
+  } catch (err) {
+    console.log(err.massage);
+  }
 });
 
 // format pesan whattsapp
